@@ -1,0 +1,40 @@
+HP     = mncurf.f 
+
+SOUR   =  fpcurf.f  fpgivs.f  fprati.f fpback.f  fpchec.f  fpdisc.f\
+	fpknot.f  fprota.f splev.f  curfit.f splev.f
+
+OBJ    = fpcurf.o  fpgivs.o  fprati.o fpback.o  fpchec.o  fpdisc.o\
+	fpknot.o  fprota.o splev.o curfit.o splev.o 
+
+OBJ_HP = mncurf.o
+
+##############################################################################
+#AIX-Optionen
+######
+F77 = gfortran  
+DEB = -O2
+##############################################################################
+
+.SUFFIXES:
+
+.SUFFIXES: .o .f
+.f.o:
+	$(F77) -c $(DEB) $<
+
+
+
+OBJ: $(SOUR)
+	$(F77) -c $(DEB) $?
+	ar rv lib_cur.a $(?F:.f=.o); mv lib_cur.a ..
+	rm *.o
+
+OBJ_HP: $(HP)
+	$(F77) -c $(DEB) $?
+
+
+
+mncurf: $(OBJ) $(OBJ_HP)
+	$(F77) $(DEB) -o $@  $(OBJ) $(OBJ_HP) 
+
+clean:
+	rm *.o

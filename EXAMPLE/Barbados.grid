@@ -1,0 +1,62 @@
+&GridFileOut
+WNull=.FALSE.     ! -> *.WNull
+GCut=.TRUE.       ! -> *.Cut.out.gmvG
+GCut2=.FALSE.     ! -> *.Cut2.out.gmvG
+GSoil=.TRUE.      ! -> *.Soil.out.gmvG
+GONull=.FALSE.    ! -> *.ONull.out.gmvG
+GOro=.TRUE.       ! -> *.Oro.out.gmvG
+Bound=.FALSE.     ! -> *.bound
+Pbound=.FALSE.    ! -> *.pva.bound
+Pgall=.FALSE.     ! -> *.pva.gall
+Ptropo=.FALSE.    ! -> *.pva.tropo
+/END
+
+#Gitter
+ cart
+  170000  272400  512 ! dx=200m
+ 1405000 1507400  512 ! dy=200m
+       0    5000  100 ! dz= 50m
+
+&OutGMVControl
+ out_wahlgrid='C',   ! Output-Grid: G-Global,C-Cartesian
+ out_type='b',       ! Output-format: b->binary,a->ascii
+ invalue_to_out='y'  ! convert 'rad' to input value (z.Zt.'geo') for gmv-Output
+ RadOutput=1.0d6,    ! RadOutput, value to numerator for parametrization
+ ScaleRad=1.0d5,     ! ScaleRad, value to denominator for parametrization
+ MoveXYGrid=0        ! move grid to scale-x-y, 0 .or. 1 as factor
+/
+
+&GridDistsCtrl
+ dist_fscv=1.0d-12,     ! for fine scaling dist to in_out-def, CheckVertex
+ distx_coeff=0.10d0    !0.01,      ! Distance Point(x) coefficient for analyze
+ disty_coeff=0.10d0    !0.01,      ! Distance Point(y) coefficient for analyze
+ distz_coeff=0.10d0    !0.01,      ! Distance Point(z) coefficient for analyze
+ dxViewLoc=1.0d-8,      ! Distance Point(x) coefficient of model border
+ dyViewLoc=1.0d-8,      ! Distance Point(y) coefficient of model border
+ dzViewLoc=1.0d-8,      ! Distance Point(z) coefficient of model border
+ Shrink=1.0d-6,         ! shrinks points of volume-analysis (0 für Einheitswürfel)
+ IncrVol=10             ! counter for cuts of volume-analysis (1 für Einheitswürfel)
+/END
+
+#Funktion
+UTM
+BarbadosFull_200m.utm
+
+#OutputDomain
+   XYZ_Number
+   0 512
+   0 512
+   0 100 
+
+#Multiblock
+           0         512      ! X ... nxa, nxe
+           0         512      ! Y ... nya, nye
+           0         100      ! Z ... nza, nze
+ 
+        1        !Number of blocks ... nb
+                              !Block           1
+           0          512      ! ixa, ixe
+           0          512      ! iya, iye
+           0         100      ! iza, ize
+ 0 0 0 0 4 T T
+

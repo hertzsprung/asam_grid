@@ -1,0 +1,80 @@
+#Gitter
+cart 
+-30000.0d0  30000.0d0  300  
+0.0d0  200.0d0  1  
+      0.0d0   10000.0d0   200 
+
+&GridFileOut
+WNull=.FALSE.     ! -> *.WNull
+GCut=.TRUE.      ! -> *.Cut.out.gmvG
+GCut2=.FALSE.     ! -> *.Cut2.out.gmvG
+GSoil=.FALSE.      ! -> *.Soil.out.gmvG
+GONull=.FALSE.    ! -> *.ONull.out.gmvG
+GOro=.TRUE.       ! -> *.Oro.out.gmvG
+Bound=.FALSE.     ! -> *.bound
+Pbound=.FALSE.    ! -> *.pva.bound
+Pgall=.FALSE.     ! -> *.pva.gall
+Ptropo=.FALSE.    ! -> *.pva.tropo
+/END
+
+&OutGMVControl               ! Output-Grid: G-Global,C-Cartesian
+ out_wahlgrid='C',           ! Output-Grid: G-Global,C-Cartesian
+ out_type='b',               ! Output-format: b->binary,a->ascii
+ RadOutput=1.0d6,              ! RadOutput, value added to numerator for parametrization
+ ScaleRad=1.0d5,               ! ScaleRad, value to denominator for parametrization
+/
+
+&GridDistsCtrl
+ dist_fscv=1.0d-12,     ! for fine scaling dist to in_out-def, CheckVertex
+ distx_coeff=0.01   !0.01,      ! Distance Point(x) coefficient for analyze
+ disty_coeff=0.01   !0.01,      ! Distance Point(y) coefficient for analyze
+ distz_coeff=0.01   !0.01,      ! Distance Point(z) coefficient for analyze
+ dxViewLoc=1.0d-8,      ! Distance Point(x) coefficient of model border
+ dyViewLoc=1.0d-8,      ! Distance Point(y) coefficient of model border
+ dzViewLoc=1.0d-8,      ! Distance Point(z) coefficient of model border
+ Shrink=1.0d-6,         ! shrinks points of volume-analysis (0 für Einheitswürfel)
+ IncrVol=10             ! counter for cuts of volume-analysis (1 für Einheitswürfel)
+/END
+
+
+#Funktion
+  Agnesi2D
+  500.0     ! H
+  1000.0    ! a
+  1000.0    ! a_up/a_down
+  0.0        ! x_m
+
+
+#OutputDomain
+XYZ_Number
+0 300  
+0 1  
+0 200 
+
+
+#Multiblock
+           0         300      ! X ... nxa, nxe
+           0           1      ! Y ... nya, nye
+           0          200      ! Z ... nza, nze
+ 
+           1        !Number of blocks ... nb
+                              !Block           1
+           0          300      ! ixa, ixe
+           0           1      ! iya, iye
+           0          200      ! iza, ize
+ 0 0 0 0 4 T T
+                              !Block           2
+          75         150      ! ixa, ixe
+           0           1      ! iya, iye
+           0          200      ! iza, ize
+ 0 0 0 0 4 T T
+                              !Block           3
+         150         225      ! ixa, ixe
+           0           1      ! iya, iye
+           0          200      ! iza, ize
+ 0 0 0 0 4 T T
+                              !Block           4
+         225         300      ! ixa, ixe
+           0           1      ! iya, iye
+           0          200      ! iza, ize
+ 0 0 0 0 4 T T

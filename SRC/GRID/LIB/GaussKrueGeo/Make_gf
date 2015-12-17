@@ -1,0 +1,33 @@
+HP     = MainGkGeo.f90
+OBJ_HP = MainGkGeo.o
+
+SOUR   = ogkgeo.f ogeogk.f
+OBJ    = ogkgeo.o ogeogk.o
+
+##############################################################################
+#AIX-Optionen
+######
+F77 = gfortran 
+DEB = -O2
+##############################################################################
+
+
+
+.SUFFIXES:
+.SUFFIXES: .o .f
+.f.o:
+	$(F77) -c $(DEB) $<
+
+OBJ: $(SOUR)
+	$(F77) -c $(DEB) $?
+	ar rv lib_gk.a $(?F:.f=.o); mv lib_gk.a ..
+	rm *.o
+OBJ_HP: $(HP)
+	$(F77) -c $(DEB) $?
+
+
+gk_geo_g: $(OBJ) $(OBJ_HP)
+	$(F77) $(DEB) -o $@  $(OBJ) $(OBJ_HP) 
+
+clean:
+	rm *.o

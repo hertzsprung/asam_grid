@@ -1,0 +1,32 @@
+include ../$(IN)
+
+OBJ = Kind_Mod.f90\
+      Parameter_Mod.f90\
+      BoundaryCond_Mod.f90\
+      IOControl_Mod.f90\
+      Geometry_Mod.f90\
+      Haus_Mod.f90\
+      Tree_Mod.f90 \
+      Polygon_Mod.f90\
+      Neighbor_Mod.f90\
+      Domain_Mod.f90\
+      Floor_Mod.f90 \
+      Function_Mod.f90\
+      Parametric_Mod.f90\
+      GridInput_Mod.f90\
+      GridNeu_Mod.f90\
+      OutputWeightBlk_Mod.f90\
+      OutputOutGmvGNeu_Mod.f90\
+      OutputUnstructuredGrid_Mod.f90
+
+$(LIBGRID)/libgrid.a: $(OBJ)
+	@if [ -f *.o ] ;\
+          then  rm *.o ;\
+         fi
+	$(F90) $(OPTFREE)  -I. $(INCL) $(KGRIDINCL) -c $(PCL) $?
+	@ar $(X64) rv $(LIBGRID)/libgrid.a ${?:.f90=.o}
+	@ar $(X64) ts $(LIBGRID)/libgrid.a
+	@rm *.o
+	@for i in *.$(ModSuf); do \
+  mv $$i $(LIBGRID); \
+  done

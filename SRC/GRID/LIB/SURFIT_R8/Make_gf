@@ -1,0 +1,35 @@
+HP     = mnsurf.f
+SOUR   = fpbspl.f fpbisp.f fpgivs.f fprank.f fprota.f fpback.f fpdisc.f\
+	fporde.f fprati.f fpsurf.f bispev.f surfit.f
+
+OBJ    = fpbspl.o fpbisp.o fpgivs.o fprank.o fprota.o fpback.o fpdisc.o\
+	fporde.o fprati.o fpsurf.o bispev.o surfit.o
+OBJ_HP = mnsurf.o
+
+##############################################################################
+#AIX-Optionen
+######
+F77 = gfortran 
+DEB = -O2 
+##############################################################################
+
+
+
+.SUFFIXES:
+.SUFFIXES: .o .f
+.f.o:
+	$(F77) --arch=x86_64 -c $(DEB) $<
+
+OBJ: $(SOUR)
+	$(F77) -c $(DEB) $?
+	ar -rv  lib_surf.a $(?F:.f=.o); mv lib_surf.a ..
+	rm *.o
+OBJ_HP: $(HP)
+	$(F77) -c $(DEB) $?
+
+
+mnsurf_g: $(OBJ) $(OBJ_HP)
+	$(F77) $(DEB) -o $@  $(OBJ) $(OBJ_HP) 
+
+clean:
+	rm *.o
