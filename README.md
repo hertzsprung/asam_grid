@@ -6,3 +6,4 @@ which installs `Grid.Mac` into `$HOME/bin`.  To generate a grid, ensure the cwd 
 
     Grid.Mac Agnesi2D.grid
     
+More documentation is available at http://asamwiki.tropos.de/index.php/Grid_Generator
