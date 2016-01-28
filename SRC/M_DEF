@@ -1,4 +1,3 @@
-DEFPATH = /home/jshaw/asam_grid
 ModSuf=mod
 
 OPTFREE = -ffree-form -ffixed-line-length-none -ffree-line-length-none 
@@ -18,8 +17,8 @@ OP =
 CL=
 
 INCL        = -I/usr/include -I/usr/local/include
-KGRIDINCL   = -I$(DEFPATH)/LIBGRID_Mac
-LIBGRID     = $(DEFPATH)/LIBGRID_Mac
+KGRIDINCL   = -I../LIBGRID
+LIBGRID     = LIBGRID
 CURFIT      = -L./GRID/LIB -l_cur
 SURFIT      = -L./GRID/LIB -l_surf
 GK          = -L./GRID/LIB -l_gk

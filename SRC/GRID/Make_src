@@ -19,14 +19,17 @@ OBJ = Kind_Mod.f90\
       OutputOutGmvGNeu_Mod.f90\
       OutputUnstructuredGrid_Mod.f90
 
-$(LIBGRID)/libgrid.a: $(OBJ)
+../$(LIBGRID)/libgrid.a: $(OBJ) | ../$(LIBGRID)
 	@if [ -f *.o ] ;\
           then  rm *.o ;\
          fi
 	$(F90) $(OPTFREE)  -I. $(INCL) $(KGRIDINCL) -c $(PCL) $?
-	@ar $(X64) rv $(LIBGRID)/libgrid.a ${?:.f90=.o}
-	@ar $(X64) ts $(LIBGRID)/libgrid.a
-	@rm *.o
-	@for i in *.$(ModSuf); do \
-  mv $$i $(LIBGRID); \
+	ar $(X64) rv ../$(LIBGRID)/libgrid.a ${?:.f90=.o}
+	ar $(X64) ts ../$(LIBGRID)/libgrid.a
+	rm *.o
+	for i in *.$(ModSuf); do \
+  mv $$i ../$(LIBGRID); \
   done
+
+../$(LIBGRID):
+	mkdir $@
