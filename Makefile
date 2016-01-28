@@ -1,3 +1,7 @@
+MAKEFLAGS += --no-builtin-rules                                                                 
+.DEFAULT_GOAL := SRC/GridGen
+.DELETE_ON_ERROR:
+.SUFFIXES:
 .PHONY: install
 
 INSTALL := cp

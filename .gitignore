@@ -7,4 +7,6 @@
 *.100
 *.unstr
 *.Weight2
+*.log
 LIBGRID*
+SRC/GridGen
