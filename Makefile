@@ -18,3 +18,8 @@ $(DESTDIR)$(bindir):
 
 SRC/GridGen:
 	$(MAKE) -C SRC
+
+clean:
+	find . -name *.mod -exec $(RM) {} \;
+	$(RM) SRC/GridGen
+	$(RM) -r SRC/LIBGRID

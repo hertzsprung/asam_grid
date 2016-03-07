@@ -214,6 +214,12 @@ FUNCTION Level(x,y,z)
 !            +H/(1.0+ ((x+d/2.0)/a)**2.0+ (y/b)**2.0))
     CASE ('SchaerHill')
       Level=z-H*EXP(-x**2/aSchaer**2)*(COS(Pi*x/Lambda))**2-1.d-4
+    Case ('SchaerCos')
+      IF (ABS(x) < aSchaer) THEN
+        Level=z-H*COS(x*Pi/(2.0*aSchaer))**2 * COS(x*Pi/Lambda)**2
+      ELSE
+        Level=z
+      END IF
     CASE ('Concave')
 !     Aus Zängl MWR    
       IF (y>=d) THEN
@@ -534,6 +540,10 @@ SUBROUTINE InputFunction(Filename)
           READ(InputUnit,*) b
           READ(InputUnit,*) d  !!!Abstand Bergmaxima
         CASE ('SchaerHill')
+          READ(InputUnit,*) H
+          READ(InputUnit,*) aSchaer
+          READ(InputUnit,*) Lambda
+        CASE ('SchaerCos')
           READ(InputUnit,*) H
           READ(InputUnit,*) aSchaer
           READ(InputUnit,*) Lambda
