@@ -213,7 +213,7 @@ FUNCTION Level(x,y,z)
 !     Level=z-(H/(1.0+ ((x-d/2.0)/a)**2.0+ (y/b)**2.0) &
 !            +H/(1.0+ ((x+d/2.0)/a)**2.0+ (y/b)**2.0))
     CASE ('SchaerHill')
-      Level=z-H*EXP(-x**2/aSchaer**2)*(COS(Pi*x/Lambda))**2-1.d-4
+      Level=z-H*EXP(-x**2/aSchaer**2)*(COS(Pi*x/Lambda))**2
     Case ('SchaerCos')
       IF (ABS(x) < aSchaer) THEN
         Level=z-H*COS(x*Pi/(2.0*aSchaer))**2 * COS(x*Pi/Lambda)**2
