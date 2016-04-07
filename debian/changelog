@@ -1,3 +1,9 @@
+asam-gridgen (1.2-0ubuntu1) trusty; urgency=low
+
+  * Do not shift SchaerHill terrain to avoid creating very small faces
+
+ -- James Shaw <js102@zepler.net>  Mon, 07 Apr 2016 11:39:00 +0000
+
 asam-gridgen (1.1-0ubuntu1) trusty; urgency=low
 
   * Support SchaerCos mountains
