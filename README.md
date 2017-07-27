@@ -1,3 +1,8 @@
+ASAM cut cell grid generator
+============================
+
+[![DOI](https://zenodo.org/badge/48172254.svg)](https://zenodo.org/badge/latestdoi/48172254)
+
 Edit `DEFPATH` in `SRC/M_DEF_Mac` to specify the ASAM_GRID directory.  Then compile with
     
     make MACH=Mac GridGen
