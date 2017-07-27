@@ -1,0 +1,2 @@
+debuild -i -us -uc -b
+deb-s3 upload --bucket atmosfoam-apt --codename=zesty --component=dev ../asam-gridgen_<version>_amd64.deb
